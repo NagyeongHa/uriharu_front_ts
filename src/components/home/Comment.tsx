@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
@@ -7,11 +7,12 @@ import { call, getComment } from "../../service/apiService";
 import theme from "../../styles/theme";
 import CommentItem from "./CommentItem";
 import { FaRegCommentDots } from "react-icons/fa";
+import { CommentInfo, CommentItemInfo } from "../../types/CommentInfo";
 
 function Comment() {
   const getDno = useRecoilValue(dnoState);
-  const [comment, setComment] = useState({ contents: "", dno: "" });
-  const [commentArray, setCommentArray] = useState([]);
+  const [comment, setComment] = useState({ contents: "" });
+  const [commentArray, setCommentArray] = useState<CommentItemInfo[]>([]);
   const [isShow, setIsShow] = useState(false);
   const { contents } = comment;
 
@@ -21,19 +22,22 @@ function Comment() {
   };
 
   //댓글 작성 onChange
-  const commentOnChange = e => {
-    setComment({ contents: e.target.value, dno: getDno });
-  };
+  const commentOnChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setComment({ contents: e.target.value });
+    },
+    [comment]
+  );
 
   //댓글 작성 버튼 클릭 시
-  const submitComment = () => {
+  function submitComment() {
     if (contents === "") {
       alert("댓글을 입력해 주세요");
       return;
     }
-    addComment(comment);
+    addComment({ contents: contents, dno: getDno });
     setComment({ contents: "" });
-  };
+  }
 
   //GET
   //댓글 가져오기
@@ -43,9 +47,9 @@ function Comment() {
 
   //POST
   //댓글 추가
-  const addComment = async comment => {
+  const addComment = async (commentInfo: CommentInfo) => {
     try {
-      await call("/reply/add", "POST", comment);
+      await call("/reply/add", "POST", commentInfo);
       getComment(getDno).then(response => setCommentArray(response.data));
     } catch (error) {
       console.log(error);
@@ -54,7 +58,7 @@ function Comment() {
 
   //PUT
   //댓글 수정
-  const modifyComment = async commentItem => {
+  const modifyComment = async (commentItem: CommentInfo) => {
     try {
       await call("/reply/modify", "PUT", commentItem).then(response =>
         setCommentArray(response.data)
@@ -67,7 +71,7 @@ function Comment() {
 
   //DELETE
   //댓글 삭제
-  const deleteComment = async commentItem => {
+  const deleteComment = async (commentItem: CommentInfo) => {
     try {
       if (confirm("삭제하시겠습니까?")) {
         await call("/reply/remove", "DELETE", commentItem);
@@ -100,7 +104,6 @@ function Comment() {
 
           <InputWrapper>
             <Textarea
-              type='text'
               placeholder='댓글을 작성하세요'
               name='contents'
               onChange={commentOnChange}

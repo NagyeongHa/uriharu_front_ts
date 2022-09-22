@@ -25,7 +25,6 @@ function DayDiary() {
   useEffect(() => {
     dateDiary(yyyymmdd).then(response => {
       setDiary(response);
-      console.log(diary);
 
       //해당 다이어리 dno를 전역으로 저장해서 댓글 불러올 때 사용
       if (response.length > 0) {
