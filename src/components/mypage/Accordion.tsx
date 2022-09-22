@@ -8,18 +8,19 @@ import { yyyymmddState } from "../../recoil/diary";
 import { call } from "../../service/apiService";
 import theme from "../../styles/theme";
 import "react-quill/dist/quill.bubble.css";
+import { MypageDiary } from "../../types/diaryInfo";
 
-function Accordion(props) {
-  const parentRef = useRef();
-  const childRef = useRef();
-  const { dno, yyyymmdd } = props;
+function Accordion({ idx, title, contents, yyyymmdd, dno }: MypageDiary) {
+  const parentRef = useRef<HTMLDivElement>(null);
+  const childRef = useRef<HTMLDivElement>(null);
+
   const [isCollapse, setIsCollapse] = useState(false);
   const setYyyymmdd = useSetRecoilState(yyyymmddState);
   const navigate = useNavigate();
 
   //Header 클릭 시 내용물 보여주기
   const handlerButtonClick = useCallback(
-    event => {
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       event.stopPropagation();
       if (!parentRef.current || !childRef.current) {
         return;
@@ -62,15 +63,15 @@ function Accordion(props) {
   return (
     <Container>
       <Header onClick={handlerButtonClick}>
-        <div>{props.idx}</div>
+        <div>{idx}</div>
         <Hr />
-        <HeaderTitle>{props.title}</HeaderTitle>
+        <HeaderTitle>{title}</HeaderTitle>
         <Button>{buttonText}</Button>
       </Header>
       <ContentsWrapper ref={parentRef}>
         <Contents ref={childRef}>
-          <ReactQuill theme='bubble' value={props.contents} readOnly='true' />
-          <Date>{props.yyyymmdd}</Date>
+          <ReactQuill theme='bubble' value={contents} readOnly={true} />
+          <Date>{yyyymmdd}</Date>
         </Contents>
       </ContentsWrapper>
       <ButtonWrapper>

@@ -9,3 +9,11 @@ export interface DiaryInfo {
   replylist: null;
   yyyymmdd: string;
 }
+
+export interface MypageDiary {
+  idx?: number;
+  title: string;
+  contents: string;
+  yyyymmdd: string;
+  dno: number;
+}
