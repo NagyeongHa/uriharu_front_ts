@@ -5,7 +5,7 @@ import theme from "../styles/theme";
 import { Button } from "../styles/GlobalStyle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { yyyymmddState } from "../recoil/diary";
-import TextEditer from "../components/TextEditor";
+import TextEditer from "../components/TextEditor.tsx";
 import { call, dateDiary } from "../service/apiService";
 
 function DiaryEdit() {

@@ -32,7 +32,6 @@ const Turn = () => {
     fixdresult = Math.floor(fixdgap / (1000 * 60 * 60 * 24));
 
   const turn = (fixdresult - result) % length;
-  console.log(endDay);
 
   return (
     <Div>
