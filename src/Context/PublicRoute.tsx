@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
+type Children = { children: JSX.Element };
 
-function PublicRoute({ children }) {
+function PublicRoute({ children }: Children) {
   const token = sessionStorage.getItem("ACCESS_TOKEN");
 
   //토큰 있으면 메인으로 이동

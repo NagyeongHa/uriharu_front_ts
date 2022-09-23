@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 //현재 날짜를 연-월-일 형태로 변환
-const dateToStringText = date => {
+const dateToStringText = (date: Date) => {
   return (
     date.getFullYear() +
     "-" +
@@ -24,7 +24,7 @@ export const calendarState = atom({
 });
 
 //DayDiary(Home)의 수정버튼(수정페이지로이동) 눌릴 시 해당 게시물의 dno 저장
-export const dnoState = atom({
+export const dnoState = atom<number>({
   key: "dnoState",
-  default: "",
+  default: 0,
 });

@@ -1,7 +1,7 @@
 //추가,수정,삭제 할 때
 export interface CommentInfo {
   contents: string;
-  dno: string;
+  dno: number;
   rno?: number;
 }
 

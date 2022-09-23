@@ -6,7 +6,7 @@ import { userState } from "../recoil/auth";
 import { call } from "../service/apiService";
 import { AiOutlineContainer } from "react-icons/ai";
 import Accordion from "../components/mypage/Accordion";
-import { MypageDiary } from "../types/diaryInfo";
+import { MypageDiary } from "../types/Diary";
 
 function MyPage() {
   const [diary, setDiary] = useState<MypageDiary[]>([]);

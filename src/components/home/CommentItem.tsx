@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { userState } from "../../recoil/auth";
 import { dnoState } from "../../recoil/diary";
 import theme from "../../styles/theme";
-import { CommentProp } from "../../types/CommentInfo";
+import { CommentProp } from "../../types/Comment";
 
 function CommentItem({ comments, modifyComment, deleteComment }: CommentProp) {
   const { nickname, contents, regdate, rno, writer } = comments;

@@ -1,15 +1,17 @@
 import { API_BASE_URL } from "../config";
+import { UserDTO } from "../types/UserInfo";
 
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
-export const call = (api, method, request) => {
+export const call = <T>(api: string, method: string, request: T) => {
+  let url = API_BASE_URL + api;
+
   let headers = new Headers({
     "Content-Type": "application/json",
   });
 
-  let options = {
+  let options: RequestInit = {
     headers: headers,
-    url: API_BASE_URL + api,
     method: method,
   };
 
@@ -24,7 +26,7 @@ export const call = (api, method, request) => {
   }
 
   //fetch 함수
-  return fetch(options.url, options)
+  return fetch(url, options)
     .then(response =>
       response.json().then(json => {
         if (!response.ok) {
@@ -41,19 +43,18 @@ export const call = (api, method, request) => {
       return Promise.reject(error);
     });
 };
-
 //회원가입
-export const signup = userDTO => {
+export const signup = (userDTO: UserDTO) => {
   return call("/auth/signup", "POST", userDTO);
 };
 
 //아이디 중복확인
-export const checkedId = userDTO => {
+export const checkedId = (userDTO: Partial<UserDTO>) => {
   return call("/auth/checkid", "POST", userDTO);
 };
 
 //로그인
-export const signin = userDTO => {
+export const signin = (userDTO: Partial<UserDTO>) => {
   return call("/auth/signin", "POST", userDTO);
 };
 
@@ -65,18 +66,18 @@ export const signout = () => {
 };
 
 //yyyymmdd별 다이어리 조회
-export const dateDiary = yyyymmdd => {
-  return call(`/diary/dateread/${yyyymmdd}`, "GET").then(
+export const dateDiary = (yyyymmdd: string) => {
+  return call(`/diary/dateread/${yyyymmdd}`, "GET", null).then(
     response => response.data
   );
 };
 
 //dno별 다이어리 조회
-export const dnoDiary = dno => {
+export const dnoDiary = (dno: number) => {
   return `/diary/read/${dno}`;
 };
 
 //댓글 조회
-export const getComment = dno => {
-  return call(`/reply/all/${dno}`, "GET");
+export const getComment = (dno: number) => {
+  return call(`/reply/all/${dno}`, "GET", null);
 };

@@ -4,29 +4,31 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 import { Button } from "../styles/GlobalStyle";
 import { useLocation, useNavigate } from "react-router-dom";
-import { yyyymmddState } from "../recoil/diary";
-import TextEditer from "../components/TextEditor.tsx";
+import { dnoState, yyyymmddState } from "../recoil/diary";
+import TextEditer from "../components/TextEditor";
 import { call, dateDiary } from "../service/apiService";
+import { DiaryInfo } from "../types/Diary";
 
 function DiaryEdit() {
   const location = useLocation();
   const navigate = useNavigate();
   const yyyymmdd = useRecoilValue(yyyymmddState);
-  const [content, setContent] = useState("");
   const [isEdit, setIsEdit] = useState(false); //true 작성 false 수정
-  const [diary, setDiary] = useState({ title: "", yyyymmdd: "" });
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const dno = useRecoilValue(dnoState);
 
   //yyyymmdd(날짜)별 다이어리 가져오기
   useEffect(() => {
     dateDiary(yyyymmdd).then(response => {
       //다이어리 있으면 다이어리 내용 저장
       if (response.length > 0) {
-        setDiary(response[0]);
+        setTitle(response[0].title);
         setContent(response[0].contents);
         return;
       }
 
-      //다이어리 있으면 수정페이지로 없으면 작성페이지로
+      //다이어리 있으면 수정 없으면 작성
       if (response.length === 0) {
         setIsEdit(true);
         return;
@@ -36,16 +38,16 @@ function DiaryEdit() {
 
   //제목 onChange로 받아서 diary에 저장
   const onChangeTitle = useCallback(
-    e => {
-      setDiary({ ...diary, title: e.target.value });
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setTitle(e.target.value);
     },
-    [diary]
+    []
   );
 
   //유효성 테스트
   const diaryValidation = () => {
     let validation = true;
-    if (!diary.title) {
+    if (!title) {
       alert("제목을 입력해 주세요.");
       validation = false;
       return;
@@ -58,21 +60,23 @@ function DiaryEdit() {
   };
 
   //작성버튼 누르면 write 매개변수(diaryDTO)에 diary내용담아서 처리
-  const writeHandler = event => {
+  const writeHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     //유효성 테스트
     if (diaryValidation()) {
       write({
-        title: diary.title,
+        title: title,
         yyyymmdd: yyyymmdd,
         contents: content,
       });
       //더블클릭 방지
-      event.currentTarget.disabled = true;
+      e.currentTarget.disabled = true;
     }
   };
 
   //다이어리 작성 API
-  const write = async diaryDTO => {
+  const write = async (
+    diaryDTO: Pick<DiaryInfo, "title" | "yyyymmdd" | "contents">
+  ) => {
     try {
       await call("/diary/create", "POST", diaryDTO);
       navigate("/");
@@ -86,24 +90,20 @@ function DiaryEdit() {
     //유효성 테스트
     if (diaryValidation()) {
       modify({
-        title: diary.title,
-        dno: diary.dno,
+        title: title,
+        dno: dno,
         contents: content,
       });
     }
   };
 
   //다이어리 수정 API
-  const modify = async diaryDTO => {
+  const modify = async (
+    diaryDTO: Pick<DiaryInfo, "title" | "dno" | "contents">
+  ) => {
     try {
       await call("/diary/modify", "PUT", diaryDTO);
-
-      //메인에서 수정했으면 메인페이지로, 마이페이지에서 수정했으면 마이페이지로 이동
-      if (navigate(-1) === "/") {
-        navigate("/");
-        return;
-      }
-      navigate("/mypage");
+      navigate(-1);
     } catch (error) {
       console.log(error);
     }
@@ -122,7 +122,7 @@ function DiaryEdit() {
             placeholder=' 제목을 입력해주세요'
             type='text'
             name='title'
-            value={diary.title}
+            value={title}
             onChange={onChangeTitle}
           />
         </div>

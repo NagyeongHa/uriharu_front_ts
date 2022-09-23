@@ -11,7 +11,7 @@ import Comment from "./Comment";
 import "react-quill/dist/quill.bubble.css";
 import ReactQuill from "react-quill";
 import { BsCloudHaze1 } from "react-icons/bs";
-import { DiaryInfo } from "../../types/diaryInfo";
+import { DiaryInfo } from "../../types/Diary";
 
 function DayDiary() {
   const navigate = useNavigate();

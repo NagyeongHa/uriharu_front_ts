@@ -40,7 +40,7 @@ const useSighUp = () => {
 
   //닉네임 유효성 테스트
   const onChangeNickname = useCallback(
-    e => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setForm({
         ...form,
@@ -69,7 +69,7 @@ const useSighUp = () => {
 
   //이메일 유효성 테스트
   const onChangeEmail = useCallback(
-    e => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setForm({
         ...form,
@@ -114,7 +114,7 @@ const useSighUp = () => {
 
   //비밀번호 유효성 테스트
   const onChangePassword = useCallback(
-    e => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setForm({
         ...form,
@@ -144,7 +144,7 @@ const useSighUp = () => {
 
   //비밀번호 확인 유효성 테스트
   const onchangeRepassword = useCallback(
-    e => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setForm({
         ...form,
@@ -169,7 +169,7 @@ const useSighUp = () => {
   );
 
   //회원가입 버튼 클릭
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     //유효성 검사가 다 true 일 때

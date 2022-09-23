@@ -7,7 +7,7 @@ import { call, getComment } from "../../service/apiService";
 import theme from "../../styles/theme";
 import CommentItem from "./CommentItem";
 import { FaRegCommentDots } from "react-icons/fa";
-import { CommentInfo, CommentItemInfo } from "../../types/CommentInfo";
+import { CommentInfo, CommentItemInfo } from "../../types/Comment";
 
 function Comment() {
   const getDno = useRecoilValue(dnoState);

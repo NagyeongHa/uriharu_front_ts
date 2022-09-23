@@ -8,7 +8,7 @@ import { yyyymmddState } from "../../recoil/diary";
 import { call } from "../../service/apiService";
 import theme from "../../styles/theme";
 import "react-quill/dist/quill.bubble.css";
-import { MypageDiary } from "../../types/diaryInfo";
+import { MypageDiary } from "../../types/Diary";
 
 function Accordion({ idx, title, contents, yyyymmdd, dno }: MypageDiary) {
   const parentRef = useRef<HTMLDivElement>(null);

@@ -15,5 +15,5 @@ export interface MypageDiary {
   title: string;
   contents: string;
   yyyymmdd: string;
-  dno: number;
+  dno?: number;
 }
