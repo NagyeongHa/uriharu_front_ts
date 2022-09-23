@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../config";
-import { UserDTO } from "../types/UserInfo";
+import type { UserDTO } from "../types/UserInfo";
 
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
