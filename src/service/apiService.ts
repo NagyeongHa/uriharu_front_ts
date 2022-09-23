@@ -4,13 +4,13 @@ import type { UserDTO } from "../types/UserInfo";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
 export const call = <T>(api: string, method: string, request: T) => {
-  let url = API_BASE_URL + api;
+  const url = API_BASE_URL + api;
 
-  let headers = new Headers({
+  const headers = new Headers({
     "Content-Type": "application/json",
   });
 
-  let options: RequestInit = {
+  const options: RequestInit = {
     headers: headers,
     method: method,
   };
