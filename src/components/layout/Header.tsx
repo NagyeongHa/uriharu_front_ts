@@ -10,7 +10,7 @@ function Header() {
   const token = sessionStorage.getItem("ACCESS_TOKEN");
 
   return (
-    <nav>
+    <header>
       {token ? (
         <Nav>
           <StyledLink to='/'>
@@ -24,7 +24,7 @@ function Header() {
           </Wrapper>
         </Nav>
       ) : null}
-    </nav>
+    </header>
   );
 }
 const Nav = styled.div`

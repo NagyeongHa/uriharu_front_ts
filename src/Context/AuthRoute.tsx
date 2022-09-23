@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
+import { Children } from "../types/Children";
 
-type Children = { children: JSX.Element };
 const AuthRoute = ({ children }: Children) => {
   const token = sessionStorage.getItem("ACCESS_TOKEN");
 
