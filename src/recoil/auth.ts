@@ -4,13 +4,13 @@ import { recoilPersist } from "recoil-persist";
 const { persistAtom } = recoilPersist();
 
 //유저id (uid)
-export const userIdState = atom({
+export const userIdState = atom<string>({
   key: "userIdState",
   default: "",
 });
 
 //유저 email (진짜 아이디)
-export const userEmailState = atom({
+export const userEmailState = atom<string>({
   key: "userEmailState",
   default: "",
 });

@@ -4,19 +4,16 @@ import styled from "styled-components";
 import { userState } from "../../recoil/auth";
 import { dnoState } from "../../recoil/diary";
 import theme from "../../styles/theme";
+import { CommentProp } from "../../types/Comment";
 
-function CommentItem({ comments, modifyComment, deleteComment }) {
+function CommentItem({ comments, modifyComment, deleteComment }: CommentProp) {
   const { nickname, contents, regdate, rno, writer } = comments;
 
   const getDno = useRecoilValue(dnoState);
   const { id } = useRecoilValue(userState);
 
   const [isEdit, setIsEdit] = useState(false);
-  const [comment, setComment] = useState({
-    contents: contents,
-    dno: getDno,
-    rno: rno,
-  });
+  const [comment, setComment] = useState({ contents: contents });
 
   //2022-07-20T05:25:29 => 2022-07-20 05:25:29 형식으로 변환
   const replaceRegdate = regdate.replace(/T/gi, " ");
@@ -24,8 +21,8 @@ function CommentItem({ comments, modifyComment, deleteComment }) {
   const date = replaceRegdate.replace(sliceRegdate, " ");
 
   //수정 onChange
-  const editComment = e => {
-    setComment({ contents: e.target.value, dno: getDno, rno: rno });
+  const editComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment({ contents: e.target.value });
   };
 
   //수정버튼 클릭했을 때 수정 input칸 띄우기
@@ -34,21 +31,19 @@ function CommentItem({ comments, modifyComment, deleteComment }) {
 
     //수정 input 칸에서 글 수정하다가 취소 누를 시 원래 댓글로 되돌리기
     if (!isEdit) {
-      setComment({ ...comment, contents: contents });
+      setComment({ contents: contents });
     }
   };
 
   //수정 작성 버튼 클릭 시 변경된 댓글 데이터 comment(부모) 컴포넌트로 보냄
   const modifyCommentHandler = () => {
-    console.log(comment);
-    modifyComment(comment);
+    modifyComment({ contents: comment.contents, dno: getDno, rno: rno });
     setIsEdit(false);
   };
 
   //삭제 버튼 클릭 시 삭제된 댓글 데이터 comment(부모) 컴포넌트로 보냄
   const deleteCommentHandler = () => {
-    console.log(comment);
-    deleteComment(comment);
+    deleteComment({ contents: comment.contents, dno: getDno, rno: rno });
   };
 
   return (
@@ -57,7 +52,6 @@ function CommentItem({ comments, modifyComment, deleteComment }) {
       {isEdit ? (
         <InputWrapper>
           <Textarea
-            type='text'
             value={comment.contents}
             onChange={editComment}
             name='contents'

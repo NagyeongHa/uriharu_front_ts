@@ -11,6 +11,7 @@ import Comment from "./Comment";
 import "react-quill/dist/quill.bubble.css";
 import ReactQuill from "react-quill";
 import { BsCloudHaze1 } from "react-icons/bs";
+import { DiaryInfo } from "../../types/Diary";
 
 function DayDiary() {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ function DayDiary() {
   const yyyymmdd = useRecoilValue(yyyymmddState);
   const { id } = useRecoilValue(userState);
   const setDno = useSetRecoilState(dnoState);
-  const [diary, setDiary] = useState({});
+  const [diary, setDiary] = useState<DiaryInfo[]>([]);
+
   //다이어리 가져오기
   useEffect(() => {
     dateDiary(yyyymmdd).then(response => {
@@ -42,7 +44,7 @@ function DayDiary() {
   };
 
   //다이어리 삭제
-  const deleteDiary = async dno => {
+  const deleteDiary = async (dno: number) => {
     try {
       if (confirm("삭제 시 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")) {
         await call("/diary/remove", "DELETE", { dno: dno });
@@ -65,7 +67,7 @@ function DayDiary() {
               <ReactQuill
                 theme='bubble'
                 value={list.contents}
-                readOnly='true'
+                readOnly={true}
               />
               <DateofDay>{list.yyyymmdd}</DateofDay>
               <Comment />
@@ -74,7 +76,7 @@ function DayDiary() {
             {list.writer === id ? (
               <div>
                 <ButtonWrapper>
-                  <Button onClick={() => moveDiaryEdit(list.dno)}>수정</Button>
+                  <Button onClick={moveDiaryEdit}>수정</Button>
                   <Button onClick={deleteDiaryOnclick}>삭제</Button>
                 </ButtonWrapper>
               </div>

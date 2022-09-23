@@ -14,7 +14,7 @@ const useLogin = () => {
   const setUser = useSetRecoilState(userState);
 
   const onChange = useCallback(
-    e => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target;
       setForm({
         ...form,
@@ -35,12 +35,10 @@ const useLogin = () => {
       return;
     }
     //아이디, 비밀번호 입력했을 때
-    setError({
-      message: "",
-    });
+    setError({ ...error, message: "" });
   }, [email, password, setError]);
 
-  const onSubmit = e => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 

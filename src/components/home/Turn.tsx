@@ -19,9 +19,9 @@ const Turn = () => {
   const length = arr.length;
 
   //현재 날짜 가져오기
-  let now = new Date(),
+  let now = new Date().getTime(),
     //다이어리 시작일
-    startDay = new Date("2022/07/01"),
+    startDay = new Date("2022/07/01").getTime(),
     //다이어리 종료일
     endDay = new Date("2022/12/31").getTime(),
     // 종료일 - 현재날짜

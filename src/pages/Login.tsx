@@ -9,6 +9,7 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 import { AiOutlineUser, AiOutlineLock } from "react-icons/ai";
 import useLogin from "../hooks/useLogin";
+import { ColorProps, IsLoadingProps } from "../types/styled";
 
 function Login() {
   const { form, error, isLoading, onChange, onSubmit } = useLogin();
@@ -149,8 +150,7 @@ const Input = styled(GlobalInput)`
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
   }
 `;
-
-const Message = styled.p`
+const Message = styled.p<ColorProps>`
   font-size: 0.9rem;
   margin: 0.2rem 0;
   color: ${props => (props.$color ? " red" : "#373636")};
@@ -161,7 +161,7 @@ const Message = styled.p`
   }
 `;
 
-const Button = styled(GlobalButton)`
+const Button = styled(GlobalButton)<IsLoadingProps>`
   width: 86.5%;
   margin-top: 0.8rem;
   font-size: 1rem;

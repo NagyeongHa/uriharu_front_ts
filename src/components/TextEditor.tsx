@@ -2,8 +2,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import theme from "../styles/theme";
+import { TextEditorProp } from "../types/TextEditorProp";
 
-function TextEditor({ content, setContent }) {
+function TextEditor({ content, setContent }: TextEditorProp) {
   // 사용하고 싶은 옵션, 나열 되었으면 하는 순서대로 나열
   const toolbarOptions = [
     // ["link", "image", "video"],

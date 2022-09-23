@@ -8,6 +8,7 @@ import {
 } from "../styles/GlobalStyle";
 import theme from "../styles/theme";
 import useSighUp from "../hooks/useSighUp";
+import { ColorProps } from "../types/styled";
 
 function SignUp() {
   const {
@@ -187,7 +188,7 @@ const Label = styled.div`
   }
 `;
 
-const Message = styled.div`
+const Message = styled.div<ColorProps>`
   font-size: 0.8rem;
   padding: 0.1rem;
   margin-left: 1.7rem;

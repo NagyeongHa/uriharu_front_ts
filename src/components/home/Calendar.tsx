@@ -1,9 +1,10 @@
 import DatePicker from "react-datepicker";
-import { ko } from "date-fns/esm/locale";
+import ko from "date-fns/locale/ko";
+import { useSetRecoilState, useRecoilState } from "recoil";
 import "react-datepicker/dist/react-datepicker.css";
 import { GlobalContainer } from "../../styles/GlobalStyle";
 import styled from "styled-components";
-import { useRecoilState, useSetRecoilState } from "recoil";
+
 import { calendarState, yyyymmddState } from "../../recoil/diary";
 import theme from "../../styles/theme";
 import "../../styles/calendar.css";
@@ -18,7 +19,7 @@ const Calendar = () => {
   const [getClickDate, setClickDate] = useRecoilState(calendarState);
 
   //선택한 달력 날짜 값을 연-월-일 스트링 형태로 변환
-  const dateToStringText = date => {
+  const dateToStringText = (date: Date) => {
     return (
       date.getFullYear() +
       "-" +
@@ -29,7 +30,7 @@ const Calendar = () => {
   };
 
   //달력 날짜 클릭 시
-  const handlerOnChange = date => {
+  const handlerOnChange = (date: Date) => {
     setYyyymmdd(dateToStringText(date)); //리코일에 스트링 돌려서 저장
     setClickDate(date);
   };
@@ -38,7 +39,7 @@ const Calendar = () => {
     <Container>
       <MyDatePicker
         selected={getClickDate}
-        onChange={date => handlerOnChange(date)}
+        onChange={(date: Date) => handlerOnChange(date)}
         locale={ko} //한글로 변경
         inline //인라인으로 바로 띄움
         maxDate={new Date()} //당일 이후 선택 불가
