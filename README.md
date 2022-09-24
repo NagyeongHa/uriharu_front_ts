@@ -35,8 +35,9 @@
 
 **Front**
 
-- React
-- Recoil
+- React v18.1
+- Recoil v0.7.3
+- TypeScript v4.7.4
 - Style-Components
 - AWS S3 + CloudFront
 
