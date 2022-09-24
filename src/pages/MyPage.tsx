@@ -25,7 +25,7 @@ function MyPage() {
   }, [location]);
 
   return (
-    <>
+    <Container>
       <Title>
         {diary.length > 0 ? (
           <>
@@ -49,10 +49,13 @@ function MyPage() {
           dno={list.dno}
         />
       ))}
-    </>
+    </Container>
   );
 }
-
+const Container = styled.div`
+  height: auto;
+  min-height: 90vh;
+`;
 const Title = styled.div`
   text-align: center;
   font-size: 1.1rem;
