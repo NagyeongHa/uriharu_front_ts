@@ -30,6 +30,8 @@ const Container = styled.div`
   background-color: white;
   border-top: 1px solid #ececec;
   font-family: inherit;
+  /* position: relative; */
+  /* transform: translateY(-100%); */
 
   & > hr {
     width: 13rem;
