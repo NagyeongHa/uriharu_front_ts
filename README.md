@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# ☁ URIHARU
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### 작은 구름들이 모여 뭉게구름이 되듯이 매일의 일기가 모여 한달을 채우는 교환일기
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+## 🌟서비스 소개
 
-### `npm start`
+약 10명의 사람들이 모여 **교환일기를 쓸 수 있는 공간**이 필요해서 만든 웹 애플리케이션입니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+매일 정해진 차례에 해당하는 사람이 그 날의 일기를 쓰고 자신이 쓴 글을 모아볼 수 있는 사이트입니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**7월부터 사용자들이 실제로 사용** 하고있으며 사용자들이 원하는 기능이 있다면 그 때마다 추가하고 있습니다.
 
-### `npm test`
+현재도 사용자들이 조금 더 편하게 사용할 수 있도록 UI / UX , 기능을 계속 개발하고 있습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `npm run build`
+## 🙋🏻‍♀️ 팀 구성
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+|   역할    |  이름  |                 Github                  |
+| :-------: | :----: | :-------------------------------------: |
+| Front-End | 하나경 | [Github](https://github.com/NagyeongHa) |
+| Back-End  | 허지원 |   [Github](https://github.com/heocat)   |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🗓️ 개발 기간
 
-### `npm run eject`
+2022.06.01 ~ 2022.07.05 (필요한 기능 계속 추가중)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<br>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ 사용 기술
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Front**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React
+- Recoil
+- Style-Components
+- AWS S3 + CloudFront
 
-## Learn More
+**Back**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- JAVA
+- Spring Boot
+- SPL
+- JPA
+- JWT
+- PostgreSQL
+- Heroku
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br>
 
-### Code Splitting
+## 📌 기능 구현
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 일기 조회
 
-### Analyzing the Bundle Size
+달력을 클릭하면 클릭한 날짜에 해달하는 일기를 조회할 수 있습니다.
+![2022-08-28 18;23;28](https://user-images.githubusercontent.com/90600892/188437983-5f5b2f69-370b-4c20-90e3-cd7f1eeee5f9.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<br>
 
-### Making a Progressive Web App
+### 일기 작성
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![일기 작성](https://user-images.githubusercontent.com/90600892/188438648-986d52f2-374d-4374-83ee-3e91104ff744.gif)
 
-### Advanced Configuration
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 일기 수정 / 삭제
 
-### Deployment
+로그인한 유저아이디와 일기를 작성한 아이디가 일치하면 수정 / 삭제 버튼을 보여줍니다.
+![일기 수정_삭제](https://user-images.githubusercontent.com/90600892/188438951-f91f501e-55e4-449e-bfdf-57f8b1230823.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br>
 
-### `npm run build` fails to minify
+### 댓글 수정 / 삭제
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+일기마다 댓글을 남길 수 있습니다. 말풍선 아이콘을 클릭하면 댓글창을 볼 수 있으며 댓글 수정 / 삭제가 가능합니다.
+![댓글](https://user-images.githubusercontent.com/90600892/188439267-e55478fc-f418-40ca-a786-964c9ff02997.gif)
+
+<br>
+
+### 내가 쓴 일기 모아보기
+
+마이페이지에서 내가 쓴 일기를 볼 수 있으며 아코디언 형식으로 구현하였습니다.
+여기서도 마찬가지로 수정과 삭제를 할 수 있습니다.
+![마이페이지](https://user-images.githubusercontent.com/90600892/188439277-1631614a-dcb6-41f7-8708-2dcc91ae408a.gif)
