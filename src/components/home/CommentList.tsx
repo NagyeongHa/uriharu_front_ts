@@ -50,7 +50,8 @@ function Comment() {
   const addComment = async (commentInfo: CommentInfo) => {
     try {
       await call("/reply/add", "POST", commentInfo);
-      getComment(getDno).then(response => setCommentArray(response.data));
+      const response = await getComment(getDno);
+      setCommentArray(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +64,8 @@ function Comment() {
       await call("/reply/modify", "PUT", commentItem).then(response =>
         setCommentArray(response.data)
       );
-      getComment(getDno).then(response => setCommentArray(response.data));
+      const response = await getComment(getDno);
+      setCommentArray(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +78,8 @@ function Comment() {
       if (confirm("삭제하시겠습니까?")) {
         await call("/reply/remove", "DELETE", commentItem);
       }
-      getComment(getDno).then(response => setCommentArray(response.data));
+      const response = await getComment(getDno);
+      setCommentArray(response.data);
     } catch (error) {
       console.log(error);
     }

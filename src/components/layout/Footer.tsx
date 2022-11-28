@@ -53,7 +53,8 @@ const Container = styled.div`
   & > a,
   a:hover,
   a:active,
-  a:visited {
+  a:visited,
+  a:link {
     text-decoration: none;
     color: black;
   }
