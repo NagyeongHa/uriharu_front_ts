@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { userState } from "../../recoil/auth";
@@ -7,7 +7,7 @@ import { yyyymmddState, dnoState } from "../../recoil/diary";
 import { call, dateDiary } from "../../service/apiService";
 import { Button } from "../../styles/GlobalStyle";
 import theme from "../../styles/theme";
-import Comment from "./Comment";
+import Comment from "./CommentList";
 import "react-quill/dist/quill.bubble.css";
 import ReactQuill from "react-quill";
 import { BsCloudHaze1 } from "react-icons/bs";
@@ -15,7 +15,7 @@ import { DiaryInfo } from "../../types/Diary";
 
 function DayDiary() {
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const yyyymmdd = useRecoilValue(yyyymmddState);
   const { id } = useRecoilValue(userState);
   const setDno = useSetRecoilState(dnoState);
@@ -31,7 +31,7 @@ function DayDiary() {
         setDno(response[0].dno);
       }
     });
-  }, [location, setDno, yyyymmdd]);
+  }, [setDno, yyyymmdd]);
 
   //수정화면으로
   const moveDiaryEdit = () => {
@@ -49,7 +49,9 @@ function DayDiary() {
       if (confirm("삭제 시 되돌릴 수 없습니다. 정말 삭제하시겠습니까?")) {
         await call("/diary/remove", "DELETE", { dno: dno });
         alert("삭제되었습니다.");
-        navigate("/");
+
+        const res = await dateDiary(yyyymmdd);
+        setDiary(res);
       }
     } catch (error) {
       console.log(error);
