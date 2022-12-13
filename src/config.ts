@@ -6,7 +6,7 @@ if (hostname === "localhost") {
   backendHost = "http://localhost:8080/uriharu";
 } else {
   backendHost =
-    "https://port-0-uriharu-backend-422t024lblxt1w1.gksl2.cloudtype.app/";
+    "https://port-0-uriharu-backend-422t024lblxt1w1.gksl2.cloudtype.app";
 }
 
 export const API_BASE_URL = `${backendHost}`;
